@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Just a simple rest client">
+  <meta name="author" content="Jairo García">
+
+  <title>Rest client</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="rest_client.css">
+</head>
+
+<body>
+
+  <div class="jumbotron">
+    <h1>Rest client</h1>
+
+    <!-- request-->
+    <div class="col-sm-6">
+
+      <div class="container" >
+        <hr/>
+        <div class="input-group">
+          <span id="inputFileLabel" class="input-group-addon">File</span>
+          <input id="inputFilePath" type="text" class="form-control" placeholder="Some file path to load/save" aria-label="Ruta al fichero">
+          <div class="input-group-btn">
+            <button id="inputFileLoad" type="button" class="btn btn-primary" onclick="loadRequestFile()">Load</button>
+            <button id="inputFileSave" type="button" class="btn btn-primary" onclick="saveRequestFile()">Save</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="input-group">
+          <div class="input-group-btn">
+            <button id="actionDropdownVerb" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">GET</span></button>
+            <ul class="dropdown-menu">
+              <li><a href="#" onclick="selectActionVerb(this)">GET</a></li>
+              <li><a href="#" onclick="selectActionVerb(this)">POST</a></li>
+              <li><a href="#" onclick="selectActionVerb(this)">PUT</a></li>
+              <li><a href="#" onclick="selectActionVerb(this)">DELETE</a></li>
+              <li><a href="#" onclick="selectActionVerb(this)">PATCH</a></li>
+              <li><a href="#" onclick="selectActionVerb(this)">HEAD</a></li>
+            </ul>
+          </div>
+          <input id="actionInputUrl" type="text" class="form-control" placeholder="Host URL" aria-label="Inserte su url" value="https://httpbin.org/get">
+          <div class="input-group-btn">
+            <button id="actionButtonSend" type="button" class="btn btn-primary" onclick="sendRequest()">Send</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div role="tabpanel">
+          <ul class="nav nav-tabs">
+            <li role="presentation" class="active">
+              <a href="#requestTabBody" aria-controls="body" role="tab" data-toggle="tab">Body</a>
+            </li>
+            <li role="presentation">
+              <a href="#requestTabHeaders" aria-controls="headers" role="tab" data-toggle="tab">Headers</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div id="requestTabBody" role="tabpanel" class="tab-pane active">
+              <textarea id="requestTextareaBody" class="form-control" rows="10" placeholder="Add some body request" readonly></textarea>
+            </div>
+            <div id="requestTabHeaders" role="tabpanel" class="tab-pane">
+              <textarea id="requestTextareaHeaders" class="form-control" rows="10" placeholder="Add some request headers">Content-Type: application/json</textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- response-->
+    <div class="col-sm-6">
+
+      <div class="container">
+        <hr/>
+        <div class="input-group">
+          <span id="responseStatusLabel" class="input-group-addon">HTTP status</span>
+          <input id="responseStatusInput" type="text" class="form-control" aria-describedby="responseStatusLabel" readonly>
+        </div>
+      </div>
+
+      <div class="container" >
+        <div class="input-group">
+          <span id="responseTimeLabel" class="input-group-addon">Time</span>
+          <input id="responseTimeInput" type="text" class="form-control" aria-describedby="responseTimeLabel" readonly>
+        </div>
+      </div>
+
+      <div class="container">
+        <div role="tabpanel">
+          <ul class="nav nav-tabs">
+            <li role="presentation" class="active">
+              <a href="#responseTabResponse" aria-controls="response" role="tab" data-toggle="tab">Response</a>
+            </li>
+            <li role="presentation">
+              <a href="#responseTabHeaders" aria-controls="responseHeaders" role="tab" data-toggle="tab">Headers</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div id="responseTabResponse" role="tabpanel" class="tab-pane active">
+              <textarea id="responseTextarea" class="form-control" rows="10" placeholder="Here you'll see the response"></textarea>
+            </div>
+            <div id="responseTabHeaders" role="tabpanel" class="tab-pane">
+              <textarea id="responseHeadersTextarea" class="form-control" rows="10" placeholder="Some response headers"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-10 col-sm-offset-1">
+      <div class="container" >
+        <hr/>
+        <textarea id="consoleLogsTextarea" class="form-control" rows="10" placeholder="Console logs..."></textarea>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://markusslima.github.io/bootstrap-filestyle/js/bootstrap-filestyle.min.js"></script>
+  <script type="text/javascript" src="rest_client.js"></script>
+</body>
+
+</html>
